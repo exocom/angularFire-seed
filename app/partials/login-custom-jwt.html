@@ -1,0 +1,20 @@
+
+<h2>Login Page - Custom Login</h2>
+<p><a target="_blank" href="https://www.firebase.com/docs/security/custom-login.html">Learn more about custom login</a></p>
+<p>
+    Note: This demo site uses a uid to store data for a user.  In order to use this demo site make sure to create a <strong>"uid"</strong> and <strong>"email"</strong> property on the "d" object of your generated JWT.
+    <br>
+    Example :
+</p>
+<pre>{{exampleJwtWithUid|json}}</pre>
+<form>
+	<label>
+		<span>Custom Token (JWT)</span>
+		<textarea ng-model="jwt" rows="5" cols="50"></textarea>
+	</label>
+	<button ng-click="login()" ng-hide="createMode">Log In</button>
+
+	<p ng-show="err" class="error">{{err}}</p>
+
+</form>
+<p>Alternatively you can login using a <a href="#/login">Email / Password</a></p>

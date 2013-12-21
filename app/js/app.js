@@ -23,6 +23,11 @@ angular.module('myApp',
          controller: 'AccountCtrl'
       });
 
+      $routeProvider.when('/login-custom-jwt', {
+         templateUrl: 'partials/login-custom-jwt.html',
+         controller: 'LoginCustomJwtCtrl'
+      });
+
       $routeProvider.when('/login', {
          templateUrl: 'partials/login.html',
          controller: 'LoginCtrl'

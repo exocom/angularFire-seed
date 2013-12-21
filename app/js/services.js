@@ -58,7 +58,12 @@
                      callback && callback(null, user);
                   }, callback);
                },
-
+               loginCustom: function(jwt, callback){
+                  assertAuth();
+                  auth.$login(jwt).then(function(user) {
+                     callback && callback(null, user);
+                  }, callback);
+               },
                logout: function() {
                   assertAuth();
                   auth.$logout();

@@ -76,8 +76,37 @@ angular.module('myApp.controllers', [])
       };
    }])
 
+    .controller('LoginCustomJwtCtrl', ['$scope', 'loginService', '$location', function($scope, loginService, $location) {
+        $scope.jwt = null;
+        $scope.exampleJwtWithUid = {"admin":true,"v":0,"iat":1359943067,"d":{"user":"test","uid":'customlogin:1',"email":'test@firebase.com'}};
+
+        $scope.login = function() {
+            $scope.err = null;
+            if( !$scope.jwt ) {
+                $scope.err = 'Please enter a custom token';
+            }
+            else {
+                loginService.loginCustom($scope.jwt, function(err, user) {
+                    $scope.err = err? err + '' : null;
+                    if( !err ) {
+                        $location.replace();
+                        $location.path('/account');
+                    }
+                });
+            }
+        };
+    }])
+
    .controller('AccountCtrl', ['$scope', 'loginService', 'syncData', '$location', function($scope, loginService, syncData, $location) {
-      syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
+       $scope.$watch('auth',function(){
+           if(typeof $scope.auth === 'object'){
+               if($scope.auth.user && $scope.auth.user.uid){
+                   syncData(['users', $scope.auth.user.uid]).$bind($scope, 'user');
+               } else {
+                   $scope.user = 'Not Available no uid found'
+               }
+           }
+       });
 
       $scope.logout = function() {
          loginService.logout();
